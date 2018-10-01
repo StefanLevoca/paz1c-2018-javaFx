@@ -1,21 +1,25 @@
-package sk.gursky.paz1c.EntranceSystem;
+package sk.gursky.paz1c.helloworld;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class App extends Application {
+public class HelloWorldApp extends Application {
 	
 	public void start(Stage stage) throws Exception {
-		EntranceMainController controller = new EntranceMainController();
+		HelloWorldController controller = new HelloWorldController();
 		FXMLLoader fxmlLoader = new FXMLLoader(
-				getClass().getResource("EntranceMain.fxml"));
+				getClass().getResource("HelloWorld.fxml"));
 		fxmlLoader.setController(controller);
 		Parent rootPane = fxmlLoader.load();
 		Scene scene = new Scene(rootPane);
-		stage.setTitle("Entrance system");
+		stage.setTitle("Hello World");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -24,4 +28,3 @@ public class App extends Application {
 		launch(args);
 	}
 }
-

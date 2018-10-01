@@ -23,4 +23,9 @@ public class User {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	@Override
+	public String toString() {
+		return "User [chipId=" + chipId + ", meno=" + meno + ", active=" + active + "]";
+	}
+	
 }
