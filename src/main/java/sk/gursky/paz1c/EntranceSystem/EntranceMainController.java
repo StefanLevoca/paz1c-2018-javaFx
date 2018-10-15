@@ -1,8 +1,5 @@
 package sk.gursky.paz1c.EntranceSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +10,7 @@ import javafx.scene.control.TextField;
 
 public class EntranceMainController {
 
-	private UserDao userDao = new UserDao();
+	private UserDao userDao = UserDaoFactory.INSTANCE.getUserDao();
 	
 	public EntranceMainController() {
 		User u = new User();

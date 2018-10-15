@@ -14,7 +14,7 @@ class UserListTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		userList = new UserDao();
+		userList = new MemoryUserDao();
 		User u = new User();
 		u.setChipId("123456");
 		u.setMeno("Jano");
