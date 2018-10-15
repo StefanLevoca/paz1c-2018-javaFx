@@ -4,29 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 public class EntranceMainController {
 
-	private List<User> users = new ArrayList<User>();
+	private UserDao userDao = new UserDao();
 	
 	public EntranceMainController() {
 		User u = new User();
 		u.setChipId("123456");
 		u.setMeno("Jano");
-		users.add(u);
+		userDao.addUser(u);
 		u = new User();
 		u.setChipId("223456");
 		u.setMeno("Fero");
-		users.add(u);
+		userDao.addUser(u);
 	}
 	
     @FXML
     private ListView<User> usersListView;
 
     @FXML
+    private TextField chipIdTextField;
+
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private Button addButton;
+    
+    private UserFxModel editedUser = new UserFxModel();
+    
+    @FXML
     void initialize() {
-    	usersListView.setItems(FXCollections.observableArrayList(users));
+    	chipIdTextField.textProperty().bindBidirectional(editedUser.chipIdProperty());
+    	nameTextField.textProperty().bindBidirectional(editedUser.nameProperty());
+    	usersListView.setItems(FXCollections.observableArrayList(userDao.getAll()));
+    	
+    	addButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				// ulozit noveho pouzivatela
+				User newUser = editedUser.getUser();
+				userDao.addUser(newUser);
+				usersListView.getItems().add(newUser);
+			}
+		});
     }
 }

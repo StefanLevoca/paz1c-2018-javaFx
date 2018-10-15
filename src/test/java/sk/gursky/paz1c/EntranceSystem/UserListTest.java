@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 class UserListTest {
 
-	private UserList userList;
+	private UserDao userList;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		userList = new UserList();
+		userList = new UserDao();
 		User u = new User();
 		u.setChipId("123456");
 		u.setMeno("Jano");

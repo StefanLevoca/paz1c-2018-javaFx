@@ -1,6 +1,8 @@
 package sk.gursky.paz1c.EntranceSystem;
 
 public class User {
+	
+	private Long id;
 	private String chipId;
 	private String meno;
 	private boolean active = true;
@@ -23,9 +25,14 @@ public class User {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "User [chipId=" + chipId + ", meno=" + meno + ", active=" + active + "]";
+		return "User [id=" + id + ", chipId=" + chipId + ", meno=" + meno + ", active=" + active + "]";
 	}
-	
 }

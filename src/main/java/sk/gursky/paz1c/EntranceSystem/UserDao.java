@@ -3,13 +3,19 @@ package sk.gursky.paz1c.EntranceSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserList {
+public class UserDao {
+	private long lastId = 0;
 	private List<User> users = new ArrayList<User>();
 	
 	public void addUser(User user) {
 		if (user != null) {
+			user.setId(++lastId);
 			users.add(user);
 		}
+	}
+	
+	public List<User> getAll() {
+		return users;
 	}
 	
 	public int usersCount() {
