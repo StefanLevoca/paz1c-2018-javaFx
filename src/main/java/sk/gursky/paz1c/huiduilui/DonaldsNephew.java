@@ -1,3 +1,4 @@
+package sk.gursky.paz1c.huiduilui;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,10 @@ public enum DonaldsNephew {
 	
 	public String getName(String language) {
 		return names.get(language);
+	}
+	
+	public String getColor() {
+		return color;
 	}
 	
 	public static DonaldsNephew getByName(String name) {

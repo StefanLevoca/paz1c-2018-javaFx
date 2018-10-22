@@ -1,7 +1,5 @@
 package sk.gursky.paz1c.EntranceSystem.persistent;
 
-import java.sql.SQLException;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
