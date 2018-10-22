@@ -1,4 +1,4 @@
-package sk.gursky.paz1c.EntranceSystem;
+package sk.gursky.paz1c.EntranceSystem.persistent;
 
 import java.util.List;
 

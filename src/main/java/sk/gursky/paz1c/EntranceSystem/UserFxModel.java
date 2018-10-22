@@ -2,6 +2,7 @@ package sk.gursky.paz1c.EntranceSystem;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import sk.gursky.paz1c.EntranceSystem.persistent.User;
 
 public class UserFxModel {
 
@@ -30,7 +31,7 @@ public class UserFxModel {
 	public User getUser() {
 		User user = new User();
 		user.setChipId(getChipId());
-		user.setMeno(getName());
+		user.setName(getName());
 		return user;
 	}
 }

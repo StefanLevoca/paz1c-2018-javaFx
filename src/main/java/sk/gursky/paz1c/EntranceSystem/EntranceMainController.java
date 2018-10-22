@@ -7,20 +7,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import sk.gursky.paz1c.EntranceSystem.persistent.User;
+import sk.gursky.paz1c.EntranceSystem.persistent.UserDao;
+import sk.gursky.paz1c.EntranceSystem.persistent.DaoFactory;
 
 public class EntranceMainController {
 
-	private UserDao userDao = UserDaoFactory.INSTANCE.getUserDao();
+	private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
 	
 	public EntranceMainController() {
-		User u = new User();
-		u.setChipId("123456");
-		u.setMeno("Jano");
-		userDao.addUser(u);
-		u = new User();
-		u.setChipId("223456");
-		u.setMeno("Fero");
-		userDao.addUser(u);
+//		User u = new User();
+//		u.setChipId("123456");
+//		u.setName("Jano");
+//		userDao.addUser(u);
+//		u = new User();
+//		u.setChipId("223456");
+//		u.setName("Fero");
+//		userDao.addUser(u);
 	}
 	
     @FXML

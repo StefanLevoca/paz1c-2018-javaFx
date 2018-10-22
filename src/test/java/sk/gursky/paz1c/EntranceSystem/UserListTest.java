@@ -8,6 +8,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import sk.gursky.paz1c.EntranceSystem.persistent.MemoryUserDao;
+import sk.gursky.paz1c.EntranceSystem.persistent.User;
+import sk.gursky.paz1c.EntranceSystem.persistent.UserDao;
+
 class UserListTest {
 
 	private UserDao userList;
@@ -17,7 +21,7 @@ class UserListTest {
 		userList = new MemoryUserDao();
 		User u = new User();
 		u.setChipId("123456");
-		u.setMeno("Jano");
+		u.setName("Jano");
 		userList.addUser(u);
 	}
 
