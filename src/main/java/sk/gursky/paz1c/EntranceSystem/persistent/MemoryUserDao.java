@@ -24,26 +24,16 @@ public class MemoryUserDao implements UserDao {
 	public int usersCount() {
 		return users.size();
 	}
-
-	@Override
-	public boolean validate(String chipId) {
-		for(User u: users) {
-			if (chipId.equals(u.getChipId())) {
-				if (!u.isActive()) {
-					return false;
-				}
-				return true;
-			}
-		} 
-		return false;
-	}
 	
-	@Override
-	public void deactivate(String chipId) {
-		for(User u: users) {
-			if (chipId.equals(u.getChipId())) {
-				u.setActive(false);
+	public void save(User user) {
+		if (user.getId() == null) {
+			addUser(user);
+		} else {
+			for (int i = 0; i < users.size(); i++) {
+				if (user.equals(users.get(i))) {
+					users.set(i, user);
+				}
 			}
-		} 		
+		}
 	}
 }

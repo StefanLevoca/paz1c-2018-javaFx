@@ -36,22 +36,22 @@ class UserListTest {
 		assertEquals(count, userList.usersCount());
 	}
 	
-	@Test
-	void testValidate() {
-		assertTrue(userList.validate("123456"));
-		assertFalse(userList.validate("111111"));
-		
-		User u = new User();
-		u.setActive(false);
-		u.setChipId("111111");
-		userList.addUser(u);
-		
-		assertFalse(userList.validate("111111"));
-	}
+//	@Test
+//	void testValidate() {
+//		assertTrue(userList.validate("123456"));
+//		assertFalse(userList.validate("111111"));
+//		
+//		User u = new User();
+//		u.setActive(false);
+//		u.setChipId("111111");
+//		userList.addUser(u);
+//		
+//		assertFalse(userList.validate("111111"));
+//	}
 	
-	@Test
-	void testDeactivate() {
-		userList.deactivate("123456");
-		assertFalse(userList.validate("123456"));
-	}
+//	@Test
+//	void testDeactivate() {
+//		userList.deactivate("123456");
+//		assertFalse(userList.validate("123456"));
+//	}
 }

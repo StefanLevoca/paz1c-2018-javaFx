@@ -10,8 +10,6 @@ public interface UserDao {
 
 	int usersCount();
 
-	boolean validate(String chipId);
-
-	void deactivate(String chipId);
+	void save(User u);
 
 }

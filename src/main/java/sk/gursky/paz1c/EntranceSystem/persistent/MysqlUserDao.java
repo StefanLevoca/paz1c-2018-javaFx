@@ -39,6 +39,7 @@ public class MysqlUserDao implements UserDao {
 		values.put("active", user.isActive());
 		
 		user.setId(insert.executeAndReturnKey(values).longValue());
+		insertCardReaders(user);
 	}
 
 	
@@ -97,17 +98,32 @@ public class MysqlUserDao implements UserDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public boolean validate(String chipId) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public void save(User user) {
+		if (user.getId() == null) {
+			addUser(user);
+		} else {
+			String sql = "UPDATE user SET chip_id = ?, name = ?, active = ? "
+					+ "WHERE id = ?";
+			jdbcTemplate.update(sql,user.getChipId(), user.getName(),
+					user.isActive(), user.getId());
+			insertCardReaders(user);
+		}
 	}
-
-	@Override
-	public void deactivate(String chipId) {
-		// TODO Auto-generated method stub
-
+	
+	private void insertCardReaders(User user) {
+		jdbcTemplate.update("DELETE FROM user_card_reader WHERE user_id= ?",
+				user.getId());
+		if (user.getCardReaders().size() > 0) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO user_card_reader (user_id,card_reader_id)");
+			sb.append(" VALUES ");
+			for (int i = 0; i < user.getCardReaders().size(); i++) {
+				sb.append("("+ user.getId() +","+ 
+							user.getCardReaders().get(i).getId()+ "),");
+			}
+			String insertSql = sb.substring(0, sb.length()-1);
+			jdbcTemplate.update(insertSql);
+		}
 	}
-
 }
