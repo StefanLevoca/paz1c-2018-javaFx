@@ -36,4 +36,8 @@ public class MemoryUserDao implements UserDao {
 			}
 		}
 	}
+	
+	@Override
+	public void delete(long id) {
+	}
 }

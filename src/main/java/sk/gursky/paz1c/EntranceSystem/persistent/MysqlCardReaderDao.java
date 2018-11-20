@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import sk.gursky.paz1c.EntranceSystem.annotations.EntityGetter;
+
 public class MysqlCardReaderDao implements CardReaderDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -16,6 +18,7 @@ public class MysqlCardReaderDao implements CardReaderDao {
 	}
 
 	@Override
+	@EntityGetter
 	public List<CardReader> getAll() {
 		String sql = "SELECT id, position FROM card_reader";
 		return jdbcTemplate.query(sql, new RowMapper<CardReader>() {

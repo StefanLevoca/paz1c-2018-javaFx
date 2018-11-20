@@ -12,4 +12,5 @@ public interface UserDao {
 
 	void save(User u);
 
+	void delete(long id);
 }

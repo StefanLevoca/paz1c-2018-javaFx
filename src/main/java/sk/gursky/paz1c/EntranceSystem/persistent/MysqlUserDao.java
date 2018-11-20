@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import sk.gursky.paz1c.EntranceSystem.annotations.EntityGetter;
+
 public class MysqlUserDao implements UserDao {
 
 	JdbcTemplate jdbcTemplate;
@@ -42,10 +44,11 @@ public class MysqlUserDao implements UserDao {
 		insertCardReaders(user);
 	}
 
-	
+	@EntityGetter
 	@Override
 	public List<User> getAll() {
-		String sql = "SELECT id, chip_id, name, active, user_card_reader.card_reader_id AS crid FROM user JOIN "
+		String sql = "SELECT id, chip_id, name, active, user_card_reader.card_reader_id AS crid "
+				+ "FROM user LEFT JOIN "
 				+ "user_card_reader ON user.id = user_card_reader.user_id";
 		List<User> users = jdbcTemplate.query(sql, new ResultSetExtractor<List<User>>() {
 
@@ -72,7 +75,9 @@ public class MysqlUserDao implements UserDao {
 						users.add(user);
 					}
 					Long idCR = rs.getLong("crid");
-					user.getCardReaders().add(myMap.get(idCR));
+					if (! rs.wasNull()) {
+						user.getCardReaders().add(myMap.get(idCR));
+					}
 				}
 				return users;
 			}
@@ -95,8 +100,8 @@ public class MysqlUserDao implements UserDao {
 
 	@Override
 	public int usersCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "SELECT count(*) from user";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 	
 	public void save(User user) {
@@ -125,5 +130,13 @@ public class MysqlUserDao implements UserDao {
 			String insertSql = sb.substring(0, sb.length()-1);
 			jdbcTemplate.update(insertSql);
 		}
+	}
+
+	@Override
+	public void delete(long id) throws UserNotFoundException {
+		jdbcTemplate.update("DELETE FROM user_card_reader WHERE user_id= ?", id);
+		int deleted = jdbcTemplate.update("DELETE FROM user WHERE id = ?", id);
+		if (deleted == 0)
+			throw new UserNotFoundException(id);
 	}
 }
